@@ -59,26 +59,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Observable<User> getObservableUsers(){
-        List<User> listUser = getListUsers();
-        return Observable.create(new ObservableOnSubscribe<User>() {
-            @Override
-            public void subscribe(@NonNull ObservableEmitter<User> emitter) throws Throwable {
-                if (listUser == null || listUser.isEmpty()){
-                    if (!emitter.isDisposed()){
-                        emitter.onError(new Exception());
-                    }
-                }
-                for (User user: listUser){
-                    if (!emitter.isDisposed()){
-                        emitter.onNext(user);
-                    }
+        //List<User> listUser = getListUsers();
+        User user1 = new User(1, "tuananh1");
+        User user2 = new User(2, "tuananh2");
+        User[] userArray =new User[] {user1, user2};
 
-                }
-                if (!emitter.isDisposed()){
-                    emitter.onComplete();
-                }
-            }
-        });
+        return Observable.fromArray(userArray);
+//        return Observable.create(new ObservableOnSubscribe<User>() {
+//            @Override
+//            public void subscribe(@NonNull ObservableEmitter<User> emitter) throws Throwable {
+//                if (listUser == null || listUser.isEmpty()){
+//                    if (!emitter.isDisposed()){
+//                        emitter.onError(new Exception());
+//                    }
+//                }
+//                for (User user: listUser){
+//                    if (!emitter.isDisposed()){
+//                        emitter.onNext(user);
+//                    }
+//
+//                }
+//                if (!emitter.isDisposed()){
+//                    emitter.onComplete();
+//                }
+//            }
+//        });
 
     }
 
